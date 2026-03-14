@@ -1,0 +1,1269 @@
+/* =========================================
+   ORTAK AYARLAR VE GİRİŞ EKRANI
+   ========================================= */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-image: url("foto.jpg"); 
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease;
+}
+
+#bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1; 
+}
+
+.hidden {
+    display: none !important;
+}
+
+.fullscreen-overlay { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000; 
+}
+
+.screen {
+    position: relative;
+    padding: 40px 60px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box; 
+    z-index: 10;
+}
+
+.screen h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.error {
+    color: #ff4d6d;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+button {
+    padding: 10px 20px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+    background: #ff1f4b;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   1. SORU CSS (ZARF)
+   ========================================= */
+#question-1 {
+    background: rgba(255, 255, 255, 0.85);
+    height: 450px;
+    padding-top: 80px;
+}
+
+.animation-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.wing {
+    background: white;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: 60px;
+    z-index: 0;
+}
+
+.right {
+    right: -60px;
+    border-radius: 12px 20px 60px 20px;
+    border-bottom: 3px solid rgba(0,0,0,.08);
+    transform-origin: left center;
+    animation: flapRight 1s infinite alternate;
+}
+
+.left {
+    left: -60px;
+    border-radius: 20px 12px 20px 60px;
+    border-bottom: 3px solid rgba(0,0,0,.08);
+    transform-origin: right center;
+    animation: flapLeft 1s infinite alternate;
+}
+
+@keyframes flapRight {
+    0% { transform: rotate(-5deg); }
+    100% { transform: rotate(15deg); }
+}
+
+@keyframes flapLeft {
+    0% { transform: rotate(5deg); }
+    100% { transform: rotate(-15deg); }
+}
+
+#envelope { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    animation: floaty 2s infinite ease-in-out alternate; 
+    border-bottom: none;
+}
+
+@keyframes floaty {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-15px); }
+}
+
+#envelope.envelope-down {
+    animation: dropDownEnvelope 1s forwards ease-in-out;
+}
+
+@keyframes dropDownEnvelope {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100px); }
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.envelope-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid #ececec;
+    border-right: 150px solid #ececec;
+    border-bottom: 110px solid #e6e6e6;
+    border-top: 90px solid transparent;
+    border-radius: 0 0 5px 5px;
+    z-index: 30;
+}
+
+.envelope-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 120px solid #fafafa;
+    border-bottom: 80px solid transparent;
+    transform-origin: top center;
+    transition: transform 0.6s ease, z-index 0.6s;
+    z-index: 35;
+}
+
+.envelope-top.open {
+    transform: rotateX(180deg);
+    z-index: 5;
+}
+
+.letter {
+    position: absolute;
+    bottom: 5px;
+    left: 5%;
+    width: 93%;
+    height: 93%;
+    background-color: #fffdf5;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 20;
+    transition: transform 1s ease 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter.open {
+    transform: translateY(-130px);
+    z-index: 40;
+}
+
+.paper-texture {
+    padding: 15px;
+    text-align: center;
+}
+
+.paper-texture h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.paper-texture p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.paper-texture input {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 125px;
+    top: 80px;
+    background-color: #ff4d6d;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    z-index: 100;
+    transition: opacity 0.4s ease, transform 0.2s;
+    animation: pulse 1.5s infinite;
+}
+
+.heart::before, .heart::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff4d6d;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart::after {
+    left: 25px;
+    top: 0;
+}
+
+.heart:hover {
+    transform: rotate(-45deg) scale(1.1);
+}
+
+.heart.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.1); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* =========================================
+   ARA SAHNE 1 (GLITCH EFEKTİ)
+   ========================================= */
+#glitch-screen {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glitch-text {
+    color: white;
+    font-size: 3rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: bold;
+    position: relative;
+    animation: glitch 500ms infinite;
+}
+
+@keyframes glitch {
+    0%, 14%, 100% { text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), -0.025em 0.05em 0 rgba(0,0,255,0.75); }
+    15%, 49% { text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75); }
+    50%, 99% { text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75); }
+}
+
+/* =========================================
+   2. SORU CSS (HACKER)
+   ========================================= */
+body.hacker-mode {
+    background-image: none !important;
+    background-color: #000000 !important;
+}
+
+body.hacker-mode #bg-overlay {
+    display: none;
+}
+
+.hacker-container {
+    background-color: #000;
+}
+
+#matrix-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hacker-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 40px;
+    pointer-events: none;
+}
+
+#logo {
+    width: 80%;
+    max-width: 500px;
+    opacity: 0.9;
+}
+
+.hacker-question-box {
+    pointer-events: auto;
+    text-align: center;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.hacker-question-box p {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+.hacker-question-box input { 
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 250px;
+    outline: none;
+    text-align: center;
+    transition: 0.3s;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.hacker-question-box input:focus {
+    border-bottom-color: #ff003c;
+}
+
+.hacker-question-box button {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    padding: 8px 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.hacker-question-box button:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+.binary {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    font-family: 'Share Tech Mono', monospace;
+    animation-duration: 800ms;
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    color: #ffffff;
+    opacity: 0.6;
+}
+
+.secret-code {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff003c;
+    font-size: 20px !important;
+    font-weight: 900;
+    opacity: 1;
+    z-index: 5;
+}
+
+/* =========================================
+   ARA SAHNE 2 (TEBRİKLER HACKER)
+   ========================================= */
+#hacker-success-screen {
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.skull {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.hacker-success-text {
+    color: #0f0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2rem;
+    text-shadow: 0 0 10px #0f0;
+    border-right: 2px solid #0f0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+/* =========================================
+   3. SORU CSS (ROMANTİK TEMA & KURDELE)
+   ========================================= */
+body.romantic-mode {
+    background-color: #222 !important;
+    background-image: none !important;
+}
+
+body.romantic-mode #bg-overlay {
+    display: none;
+}
+
+.romantic-container {
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#pink-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#ribbon-container {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+#ribbon-container:active {
+    transform: scale(0.9);
+}
+
+/* KURDELE ANİMASYONLARI VE EFEKTLERİ DÜZELTİLDİ */
+#pink-ribbon { 
+    width: 100px;
+    transition: width 0.3s ease, opacity 0.5s ease; 
+    mix-blend-mode: screen; 
+    filter: drop-shadow(0px 0px 10px rgba(255, 105, 180, 0.5));
+}
+
+#ribbon-hint {
+    color: white;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #ea80b0;
+    animation: floaty 2s infinite alternate;
+}
+
+#rose-question-box {
+    position: absolute; 
+    top: -100%; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    z-index: 20;
+}
+
+#rose-question-box.drop-down {
+    animation: dropWithVines 2s forwards ease-in-out;
+}
+
+@keyframes dropWithVines {
+    0% { top: -100%; }
+    100% { top: 50%; transform: translate(-50%, -50%); }
+}
+
+.rose-vine {
+    position: absolute;
+    width: 60px;
+    height: 100vh;
+    bottom: 100%;
+    background-image: url('https://png.pngtree.com/png-clipart/20230415/original/pngtree-vine-with-pink-flowers-png-image_9058728.png');
+    background-size: contain;
+    background-repeat: repeat-y;
+    z-index: 1;
+}
+
+.left-vine { left: 10%; }
+.right-vine { right: 10%; }
+
+.romantic-paper {
+    background: #fffdf5;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    text-align: center;
+    border: 2px solid #ea80b0;
+    position: relative;
+    z-index: 2;
+}
+
+.romantic-paper h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: #d63384;
+    margin-top: 0;
+}
+
+.romantic-paper p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.romantic-paper input {
+    width: 80%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #ea80b0;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.romantic-paper button {
+    background: #ea80b0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.romantic-paper button:hover {
+    background: #d63384;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   4. SORU CSS (KEDİ)
+   ========================================= */
+.cat-wrapper {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    background: #f5f5f5;
+    width: 50vmin;
+    height: 70vmin;
+    border-radius: 25vmin 25vmin 3vmin 3vmin;
+    border-bottom: 0.5vmin solid #777;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0.4vmin 0.4vmin, rgba(0, 0, 0, 0.25) 0 0.8vmin 0.8vmin, rgba(0, 0, 0, 0.2) 0 1.6vmin 1.6vmin;
+    transform: rotateX(0deg) rotateY(20deg) scale(1);
+    transform-style: preserve-3d;
+    transition: 1.5s ease-in-out;
+}
+
+.card::after, .card::before {
+    content: "";
+    position: absolute;
+    top: -2vmin;
+    width: 12vmin;
+    height: 7vmin;
+    border-radius: 6vmin 6vmin 0 0;
+    background: #f5f5f5;
+    box-shadow: 0 -0.3vmin 0.2vmin rgba(0, 0, 0, 0.1);
+}
+
+.card::after { left: 8vmin; transform: rotate(-10deg); }
+.card::before { left: calc(50vmin - 12vmin - 8vmin); transform: rotate(10deg); }
+.card_back { box-shadow: none; transform: translateZ(-0.1vmin); }
+
+#card { height: 0; width: 0; position: absolute; opacity: 0; appearance: none; left: 100%; }
+
+.ear-shadow {
+    z-index: 1;
+    position: absolute;
+    top: -1vmin;
+    left: 11vmin;
+    width: 8vmin;
+    height: 8vmin;
+    border-radius: 50%;
+    border-top: 0.5vmin solid rgba(180, 0, 0, 0.25);
+    transform: rotate(-25deg);
+}
+
+.ear-shadow_right { transform: rotate(25deg); left: calc(50vmin - 8vmin - 11vmin); }
+
+.eyes { z-index: 1; position: absolute; }
+.eyes::after, .eyes::before {
+    content: "";
+    position: absolute;
+    top: 15vmin;
+    width: 10vmin;
+    height: 10vmin;
+    border-radius: 50%;
+    border-top: 1vmin solid #111;
+}
+
+.eyes::after { left: 10vmin; }
+.eyes::before { left: calc(50vmin - 10vmin - 10vmin); }
+
+.nose {
+    z-index: 1;
+    position: absolute;
+    top: 23vmin;
+    left: 23.5vmin;
+    width: 3vmin;
+    height: 2vmin;
+    border-radius: 50%;
+    background: rgb(217, 134, 149);
+    box-shadow: inset 0.5vmin 0.3vmin 0.7vmin rgba(255, 255, 255, 0.8);
+}
+
+.mouth { z-index: 1; position: absolute; }
+.mouth::after, .mouth::before {
+    content: "";
+    position: absolute;
+    top: 21.7vmin;
+    width: 5vmin;
+    height: 5vmin;
+    border-radius: 50%;
+    border-bottom: 0.7vmin solid #111;
+}
+
+.mouth::after { left: 20.05vmin; }
+.mouth::before { left: calc(50vmin - 5vmin - 20.05vmin); }
+
+.mustache {
+    z-index: 1;
+    position: absolute;
+    top: 24vmin;
+    left: 9vmin;
+    width: 10vmin;
+    height: 2vmin;
+    border-radius: 50%;
+    border-top: 0.35vmin solid #111;
+    transform: rotate(-10deg);
+}
+
+.mustache::after, .mustache::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border-top: 0.35vmin solid #111;
+}
+
+.mustache::after { top: 1vmin; left: 3vmin; width: 7vmin; height: 2vmin; transform: rotate(-24deg); }
+.mustache::before { top: -1.7vmin; left: 2vmin; width: 8vmin; height: 2vmin; transform: rotate(19deg); }
+.mustache_right { left: calc(50vmin - 10vmin - 9vmin); transform: rotate(10deg) scale(-1, 1); }
+
+.paw {
+    z-index: 1;
+    position: absolute;
+    top: 37vmin;
+    left: 1vmin;
+    width: 12vmin;
+    height: 12vmin;
+    border-radius: 50%;
+    border-right: 0.6vmin solid #111;
+    box-shadow: inset -1vmin 1vmin 0 rgba(200, 200, 200, 1);
+    transform: rotate(45deg);
+}
+
+.paw_right { left: calc(50vmin - 12vmin - 1vmin); transform: rotate(-45deg) scale(-1, 1); }
+
+.plate {
+    position: absolute;
+    top: 37vmin;
+    left: 11vmin;
+    width: 28.5vmin;
+    height: 18vmin;
+    border-radius: 1vmin;
+    background-image: linear-gradient(315deg, #d99058 0%, #f8de7e 74%);
+    color: rgb(162, 71, 0, 0.5);
+    text-shadow: 0.25vmin 0.25vmin 0 #ffe897;
+    font-size: 4.5vmin;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(7deg);
+    box-shadow: 0 0.9vmin 0 #6d4c36, rgba(0, 0, 0, 0.15) 0 1.1vmin 0.2vmin;
+}
+
+.cat-ui {
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    width: 200px;
+    text-align: center;
+    z-index: 5;
+}
+
+.food-source {
+    width: 100px;
+    height: 50px;
+    background: #ff748b;
+    color: white;
+    border-radius: 25px;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fredoka One", cursive;
+    font-size: 1.2rem;
+    margin: 0 auto;
+}
+
+.food-source:active { cursor: grabbing; }
+
+.dropped-foods {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.dropped-food {
+    width: 30px;
+    height: 30px;
+    background: #ff748b;
+    border-radius: 50%;
+}
+
+#cat-question-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    z-index: 50;
+}
+
+.cat-paper {
+    background: transparent;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.cat-paper h2 { color: #ff748b; margin-top: 0; }
+
+/* =========================================
+   5. SORU CSS (STARDEW VALLEY TEMA)
+   ========================================= */
+body.stardew-mode { background-color: #87CEEB !important; background-image: none !important; }
+body.stardew-mode #bg-overlay { display: none; }
+
+#soru5-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #87CEEB;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.soru5-zemin {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background-color: #4CAF50;
+    border-top: 10px solid #388E3C;
+}
+
+.soru5-karakter {
+    position: absolute;
+    bottom: 20%;
+    font-size: 80px;
+    transition: transform 2s ease-in-out, left 2s ease-in-out, right 2s ease-in-out;
+    z-index: 10;
+}
+
+#soru5-char1 { left: -100px; }
+#soru5-char2 { right: -100px; transform: scaleX(-1); }
+
+.soru5-kucuk-kalp {
+    position: absolute;
+    font-size: 30px;
+    color: red;
+    animation: soru5-floatUp 2s ease-in forwards;
+    z-index: 5;
+    pointer-events: none;
+}
+
+@keyframes soru5-floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; transform: translateY(-20px) scale(1.2); }
+    100% { transform: translateY(-150px) scale(1); opacity: 0; }
+}
+
+#soru5-dev-kalp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 10px;
+    color: red;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.soru5-kalp-buyu { animation: soru5-growAndPulse 1.5s ease-in-out forwards !important; }
+
+@keyframes soru5-growAndPulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    80% { transform: translate(-50%, -50%) scale(40); opacity: 1; filter: drop-shadow(0 0 20px rgba(255,0,0,0.8)); }
+    100% { transform: translate(-50%, -50%) scale(50); opacity: 0; display: none; }
+}
+
+#soru5-kutu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    z-index: 30;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 50px;
+    border-radius: 15px;
+    border: 5px solid #ff4d4d;
+    text-align: center;
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.soru5-kutu-goster { opacity: 1 !important; transform: translate(-50%, -50%) scale(1) !important; }
+#soru5-kutu h1 { color: #ff4d4d; margin: 0 0 20px 0; font-size: 32px; font-family: 'Poppins', sans-serif;}
+
+.soru5-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.2s;
+}
+
+.soru5-btn:hover { transform: scale(1.1); }
+
+/* =========================================
+   6. SORU CSS (DEDEKTİF / POLİSİYE TEMA)
+   ========================================= */
+body.detective-mode { background-color: #0a1128 !important; background-image: none !important; }
+body.detective-mode #bg-overlay { display: none; }
+
+.detective-container { display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #0a1128; overflow: hidden; }
+
+.case-file {
+    background: #f4ece1;
+    width: 95%;
+    max-width: 750px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+    border-left: 15px solid #5c3a21;
+    color: #333;
+    position: relative;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.case-file::-webkit-scrollbar { width: 8px; }
+.case-file::-webkit-scrollbar-track { background: #e0d5c1; }
+.case-file::-webkit-scrollbar-thumb { background: #5c3a21; border-radius: 4px; }
+
+.top-secret {
+    color: #8b0000;
+    text-align: center;
+    border: 4px solid #8b0000;
+    padding: 10px;
+    display: inline-block;
+    transform: rotate(-3deg);
+    margin-bottom: 20px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.story-text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    border-bottom: 2px dashed #a89f91;
+    padding-bottom: 15px;
+}
+
+.clues-box {
+    background: rgba(139,0,0,0.05);
+    padding: 15px;
+    border-left: 3px solid #8b0000;
+    margin-top: 15px;
+}
+
+.suspects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.suspect-card {
+    background: #1d2d50;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid #0f182b;
+    transition: all 0.3s;
+}
+
+.suspect-card:hover {
+    background: #8b0000;
+    border-color: #4a0000;
+    transform: translateY(-5px);
+}
+
+.success-title {
+    color: #ff4d4d;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(255,77,77,0.8);
+}
+
+/* =========================================
+   7. MAKYAJ CSS
+   ========================================= */
+body.makeup-mode { background-color: #ffe4e1 !important; background-image: none !important; }
+body.makeup-mode #bg-overlay { display: none; }
+
+.makeup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffe4e1;
+}
+
+.makeup-title {
+    font-family: 'Playfair Display', serif;
+    color: #ff69b4;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.makeup-game-area {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.face-side {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.face-emoji {
+    font-size: 150px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+}
+
+.tools-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.m-tool {
+    background: white;
+    padding: 15px 25px;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    cursor: grab;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 2px solid #ff69b4;
+    font-family: 'Poppins';
+    font-weight: bold;
+    color: #ff69b4;
+    transition: transform 0.2s;
+}
+
+.m-tool:active {
+    cursor: grabbing;
+    transform: scale(0.9);
+}
+
+.makeup-fx {
+    position: absolute;
+    font-size: 30px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   8. TATLI YAPMA CSS
+   ========================================= */
+body.dessert-mode { background-color: #fffacd !important; background-image: none !important; }
+body.dessert-mode #bg-overlay { display: none; }
+
+.dessert-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffacd;
+}
+
+.dessert-title {
+    font-family: 'Fredoka One', cursive;
+    color: #ff8c00;
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+.dessert-game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.ingredients {
+    display: flex;
+    gap: 20px;
+}
+
+.ing-item {
+    background: white;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    cursor: grab;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    border: 2px solid #ff8c00;
+    font-family: 'Poppins';
+    transition: 0.3s;
+}
+
+.ing-item:active { cursor: grabbing; transform: scale(0.95); }
+.ing-item:hover { background: #ff8c00; color: white; transform: translateY(-5px); }
+
+.kitchen-center { text-align: center; }
+.bowl-emoji { font-size: 120px; transition: 0.2s ease-in-out; }
+
+@keyframes mixBowl {
+    0% { transform: rotate(0deg) translate(0,0); }
+    25% { transform: rotate(-20deg) translate(-15px, -10px); }
+    50% { transform: rotate(20deg) translate(15px, 10px); }
+    75% { transform: rotate(-20deg) translate(-15px, 10px); }
+    100% { transform: rotate(0deg) translate(0,0); }
+}
+
+.mixing { animation: mixBowl 0.4s infinite; }
+
+#bake-btn {
+    background: #ff4500;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Fredoka One', cursive;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(255,69,0,0.4);
+    animation: pulse 1s infinite;
+}
+
+.cake-emoji { font-size: 71px; cursor: pointer; transition: 0.3s; }
+.cake-emoji:hover { transform: scale(1.1); }
+
+/* =========================================
+   9. PEONY ÇİÇEĞİ CSS
+   ========================================= */
+body.peony-mode {
+    background: url('https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover !important;
+}
+
+body.peony-mode #bg-overlay {
+    display: block;
+    background: rgba(0,0,0,0.3);
+}
+
+.peony-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.peony-box {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* =========================================
+   10. EMİN MİSİN CSS
+   ========================================= */
+body.sure-mode { background-color: #111 !important; background-image: none !important; }
+body.sure-mode #bg-overlay { display: none; }
+
+.sure-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+}
+
+.sure-box { text-align: center; }
+
+.sure-title {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ff3333;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255,0,0,0.5);
+}
+
+#sure-btn {
+    background: #ff3333;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border-radius: 10px;
+    border: 2px solid white;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.2s;
+    box-shadow: 0 0 15px rgba(255,51,51,0.5);
+}
+
+#sure-btn:active { background: #cc0000; }
