@@ -249,21 +249,271 @@
         </div>
     </div>
 
+  <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sürpriz!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&family=Share+Tech+Mono&family=Great+Vibes&family=Fredoka+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="bg-overlay"></div>
+
+    <div id="login-screen" class="screen container">
+        <h1>Yıl Dönümümüz Ne Zaman? 💕</h1>
+        <div class="form">
+            <input type="date" id="anniversary-date">
+            <button onclick="checkAnniversary()">Giriş Yap</button>
+        </div>
+        <p id="login-error" class="error hidden">Yanlış tarih, tekrar dene!</p>
+    </div>
+
+    <div id="question-1" class="screen hidden question-container">
+        <div class="animation-container">
+            <div class="wing right"></div>
+            <div class="wing left"></div>
+            <div id="envelope">
+                <div class="envelope-back"></div>
+                <div id="letter" class="letter">
+                    <div class="paper-texture">
+                        <h2>Senin için bir sorum var...</h2>
+                        <p>İlk gün nerede buluştuk sevgilim?</p>
+                        <input type="text" id="answer-1" placeholder="Cevabını buraya yaz...">
+                        <button onclick="checkAnswer(1, 'bakırköy ziraat')">Cevapla</button>
+                    </div>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="envelope-top" id="envelope-top"></div>
+            </div>
+            <div class="heart" onclick="openEnvelope()" id="envelope-heart"></div>
+        </div>
+    </div>
+
+    <div id="glitch-screen" class="hidden fullscreen-overlay">
+        <div class="glitch-text" data-text="SİSTEME SIZILIYOR...">SİSTEME SIZILIYOR...</div>
+    </div>
+
+    <div id="question-2" class="hidden fullscreen-overlay hacker-container">
+        <div id="matrix-container"></div>
+        <div class="hacker-content">
+            <img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mr._Robot_Logo.svg/1280px-Mr._Robot_Logo.svg.png" alt="Mr. Robot Logo">
+            <div class="hacker-question-box">
+                <p>Akan kodların içine gizlenmiş şifreyi bulabilir misin?</p>
+                <div class="input-group">
+                    <input type="text" id="answer-2" placeholder="Şifre...">
+                    <button onclick="checkAnswer(2, 'Mr.robot')">GİRİŞ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="hacker-success-screen" class="hidden fullscreen-overlay">
+        <div class="skull">☠️</div>
+        <div class="hacker-success-text">Tebrikler, Artık Bir Hackersınız.</div>
+    </div>
+
+    <div id="question-3" class="hidden fullscreen-overlay romantic-container">
+        <canvas id="pink-canvas"></canvas>
+        <div id="ribbon-container" onclick="growRibbon()">
+            <img src="https://png.pngtree.com/png-clipart/20250104/original/pngtree-pink-ribbon-png-image_20083215.png" id="pink-ribbon" alt="Kurdele">
+            <p id="ribbon-hint">Bana Tıkla!</p>
+        </div>
+        <div id="rose-question-box" class="hidden">
+            <div class="rose-vine left-vine"></div>
+            <div class="rose-vine right-vine"></div>
+            <div class="romantic-paper">
+                <h2>Çok İyi Gidiyorsun Sevgilim!</h2>
+                <p>Sence benim için en unutulmaz anımız hangisiydi?</p>
+                <input type="text" id="answer-3" placeholder="Sence neresi?">
+                <button onclick="checkAnswer(3, 'yanımda olduğun her an')">Cevapla</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-4" class="hidden fullscreen-overlay cat-container">
+        <div class="cat-wrapper">
+            <input type="checkbox" id="card">
+            <label class="card" for="card" id="cat-dropzone">
+              <div class="ear-shadow"></div>
+              <div class="ear-shadow ear-shadow_right"></div>
+              <div class="eyes"></div>
+              <div class="mouth"></div>
+              <div class="nose"></div>
+              <div class="mustache"></div>
+              <div class="mustache mustache_right"></div>
+              <div class="paw"></div>
+              <div class="paw paw_right"></div>
+              <div class="plate" id="cat-plate">BANA MAMA VERİR MİSİN ANNECİMMM</div>
+              <div class="card card_back"></div>
+            </label>
+            <div class="cat-ui">
+                <div class="food-source" id="cat-food" draggable="true">🍖 Mama</div>
+                <div class="dropped-foods" id="cat-dropped-foods"></div>
+            </div>
+        </div>
+        <div id="cat-question-box" class="hidden">
+            <div class="cat-paper">
+                <h2>Miyav! Teşekkürler! 😻</h2>
+                <p>Bugüne kadar en çok neyine aşık oldum?</p>
+                <input type="text" id="answer-4" placeholder="Cevabını buraya yaz...">
+                <button onclick="checkAnswer(4, 'her şeyine')">Cevapla</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="question-5" class="hidden fullscreen-overlay">
+        <div id="soru5-wrapper">
+            <div class="soru5-zemin"></div>
+            <div id="soru5-char1" class="soru5-karakter">🧑‍🌾</div>
+            <div id="soru5-char2" class="soru5-karakter">👩‍🌾</div>
+            <div id="soru5-dev-kalp">❤️</div>
+            <div id="soru5-kutu">
+                <h1>Benimle evlenir misin?</h1>
+                <button class="soru5-btn" onclick="goToQuestion6()">Evet!</button>
+                <button class="soru5-btn" id="soru5-hayir" style="position: relative;" onmouseover="kacirButon(this)">Hayır</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-6" class="hidden fullscreen-overlay detective-container">
+        <div id="detective-case" class="case-file">
+            <h1 class="top-secret">ÇOK GİZLİ DOSYA</h1>
+            <div class="story-text">
+                <p><strong>Vaka:</strong> Ünlü iş adamı Selim Aras, gece çalışma odasında ölü bulundu. 23:40'ta cesedi bulan kişi hizmetçi oldu. Başının arkasına sert bir cisimle vurulmuştu. Kasadan önemli bir sözleşme kayıptı. Pencereler içeriden kilitli, kapı yarı aralıktı.</p>
+                <div class="clues-box">
+                    <strong>🔍 Olay Yeri İpuçları:</strong>
+                    <ul style="margin-top: 5px; margin-bottom: 0; padding-left: 20px;">
+                        <li>Kasanın zorlanma izi yoktu → şifre bilen biri açmış olabilir.</li>
+                        <li>Halının üzerinde mutfakta kullanılan <strong>özel baharatlı sosun</strong> çok hafif bir damlası bulundu.</li>
+                        <li>Selim’in telefonunda 22:50’de taslak mesaj: <em>"Eğer bunu yaparsan hepsini açıklarım."</em></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 style="text-align:center; color:#8b0000; margin-bottom: 10px;">ŞÜPHELİ İFADELERİ (KATİL KİM?)</h3>
+            <div class="suspects-grid">
+                <div class="suspect-card" onclick="checkKiller('Aysel')">
+                    <h3>👩 Eşi – Aysel</h3>
+                    <p>"20:30'da yedik, 22:00'den sonra yatak odasında kitap okuyordum."</p>
+                </div>
+                <div class="suspect-card" onclick="checkKiller('Abdullah')">
+                    <h3>👨‍🍳 Aşçı – Abdullah</h3>
+                    <p>"Yemeği ben hazırladım. Et, garnitür ve özel sos vardı. 22:30'da mutfağa gelip buz istedi."</p>
+                </div>
+                <div class="suspect-card" onclick="checkKiller('Buğra')">
+                    <h3>🧹 Hizmetçi – Buğra</h3>
+                    <p>"23:30'da kapıyı açık gördüm, yerde yatıyordu. 23:15 gibi koridorda hızlı adımlar duydum."</p>
+                </div>
+                <div class="suspect-card" onclick="checkKiller('Çolak')">
+                    <h3>🌿 Bahçıvan – Çolak</h3>
+                    <p>"22:45'te arka taraftaydım. Pencereden içeride bir gölge hareket ettiğini gördüm."</p>
+                </div>
+            </div>
+            <p id="killer-error" class="error hidden" style="text-align: center;">Yanlış kişi! İpuçlarını tekrar dikkatlice incele. (Özel sosa dikkat!)</p>
+        </div>
+
+        <div id="detective-success" class="hidden">
+            <h1 class="success-title">DÜNYANIN EN İYİ DEDEKTİFİSİNİZ!</h1>
+            <p style="font-size: 1.2rem; color: white;">Halının üzerindeki özel sos damlası onu ele verdi!</p>
+        </div>
+
+        <div id="detective-real-question" class="hidden case-file" style="text-align: center;">
+            <h2 style="color: #8b0000;">Harika İlerliyorsun...</h2>
+            <p>Sence benim için dünyadaki en huzurlu yer neresi?</p>
+            <input type="text" id="answer-6" placeholder="Cevabını buraya yaz...">
+            <button onclick="checkAnswer(6, 'yanın')">Cevapla</button>
+        </div>
+    </div>
+
+    <div id="question-7" class="hidden fullscreen-overlay makeup-container">
+        <h1 class="makeup-title">Deniz'e Biraz Makyaj Yapalım! 💄</h1>
+        <p style="color:#555; text-align:center; font-family:'Poppins';">Sağdaki malzemeleri yüzün üzerine sürükle.</p>
+        
+        <div class="makeup-game-area">
+            <div class="face-side">
+                <h2 style="font-family:'Poppins'; color:#333; margin-top: 0;">Deniz</h2>
+                <div id="deniz-face-drop" class="face-emoji">🧔🏻‍♂️</div>
+            </div>
+            <div class="tools-side">
+                <div class="m-tool" id="tool-ruj" draggable="true">💄 Ruj</div>
+                <div class="m-tool" id="tool-allik" draggable="true">🖌️ Allık</div>
+                <div class="m-tool" id="tool-far" draggable="true">🖍️ Far</div>
+            </div>
+        </div>
+
+        <div id="makeup-question" class="hidden case-file" style="margin-top:20px; text-align:center;">
+            <h2>Çok Yakıştı! ✨</h2>
+            <p>Makyaj yapmadan da en güzel olan kim?</p>
+            <input type="text" id="answer-7" placeholder="Cevabını buraya yaz...">
+            <button onclick="checkAnswer(7, 'aşkım')">Cevapla</button>
+        </div>
+    </div>
+
+    <div id="question-8" class="hidden fullscreen-overlay dessert-container">
+        <h1 class="dessert-title">Tatlı Zamanı! 🧁</h1>
+        <p style="color:#666; font-family:'Poppins'; text-align:center;">Malzemeleri kaseye sürükle ve karıştır.</p>
+        
+        <div class="dessert-game-area">
+            <div class="ingredients">
+                <div class="ing-item" id="ing-milk" draggable="true">🥛 Süt</div>
+                <div class="ing-item" id="ing-egg" draggable="true">🥚 Yumurta</div>
+                <div class="ing-item" id="ing-choco" draggable="true">🍫 Çikolata</div>
+            </div>
+            
+            <div class="kitchen-center">
+                <div id="bowl-drop" class="bowl-emoji">🥣</div>
+                <button id="bake-btn" class="hidden" onclick="bakeDessert()">🔥 Fırınla!</button>
+                <div id="the-cake" class="hidden cake-emoji" onclick="eatCake()">🎂 (Bana Tıkla ve Ye!)</div>
+            </div>
+        </div>
+
+        <div id="dessert-question" class="hidden case-file" style="margin-top:20px; text-align:center;">
+            <h2>Afiyet Olsun! 😋</h2>
+            <p>Beraber yapttığımız ilk şey neydi?</p>
+            <input type="text" id="answer-8" placeholder="Cevabını buraya yaz...">
+            <button onclick="checkAnswer(8, 'Taco')">Cevapla</button>
+        </div>
+    </div>
+
+    <div id="question-9" class="hidden fullscreen-overlay peony-container">
+        <div class="peony-box">
+            <h1 style="font-family:'Great Vibes', cursive; font-size:3.5rem; color:#d63384; margin-top:0;">Sadece Sen ve Ben... 🌸</h1>
+            <p style="font-family:'Poppins'; font-size:1.2rem; color:#444;">Bana bir çiçek adı söyle deseydim, ne derdin?</p>
+            <input type="text" id="answer-9" placeholder="Çiçeğin adı..." style="width:80%; padding:10px; margin-bottom:15px; border:2px solid #d63384; border-radius:8px;">
+            <br>
+            <button onclick="checkAnswer(9, 'şakayık')" style="background:#d63384; color:white; padding:10px 30px; border:none; border-radius:8px; font-size:1.1rem; cursor:pointer;">Cevapla</button>
+        </div>
+    </div>
+
+    <div id="question-10" class="hidden fullscreen-overlay sure-container">
+        <div class="sure-box">
+            <h1 class="sure-title">Buna Gerçekten Emin misin sevgilim?</h1>
+            <p style="color:#ccc; font-family:'Poppins'; font-size:1.1rem; margin-bottom:40px;">Kararından dönmek için son şansın...</p>
+            <button id="sure-btn" onclick="clickSure()">Evet (0/10)</button>
+        </div>
+    </div>
+
     <div id="final-screen" class="screen hidden container">
   <h1>Birlikte Geçen Harika Bir Yıl!</h1>
-
-  <div class="video-wrapper" style="margin-top:15px;">
-    <iframe 
-      width="100%" 
-      height="350" 
-      src="https://www.youtube.com/embed/Lc3XbAgeEoI" 
-      title="Yıl Dönümü Videosu"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
-
+<div id="final-screen" class="screen hidden container">
+        <h1>Birlikte Geçen Harika Bir Yıl!</h1>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                    src="https://youtu.be/Lc3XbAgeEoI" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
 </div>
     <script src="script.js"></script>
 </body>
